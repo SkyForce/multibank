@@ -25,7 +25,6 @@ public class RandomEventGenerator {
 
     @PostConstruct
     public void start() {
-        // produce 10 events/second (burst) for demo
         scheduler.scheduleAtFixedRate(this::emitBurst, 0, 100, TimeUnit.MILLISECONDS);
     }
 

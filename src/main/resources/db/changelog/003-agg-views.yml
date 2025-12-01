@@ -1,14 +1,14 @@
 databaseChangeLog:
   - changeSet:
-      id: create-cagg-1m
+      id: create-cagg-7m
       author: system
       runInTransaction: false
       changes:
         - sql: |
-              CREATE MATERIALIZED VIEW cagg_1m
+              CREATE MATERIALIZED VIEW cagg_7m
                 WITH (timescaledb.continuous) AS
                 SELECT
-                    time_bucket('1 minute', time) AS bucket,
+                    time_bucket('7 minute', time) AS bucket,
                     symbol,
                     first(price, time) AS open,
                     max(price)         AS high,
@@ -19,7 +19,7 @@ databaseChangeLog:
                 GROUP BY bucket, symbol;
             
               SELECT add_continuous_aggregate_policy(
-                'cagg_1m',
+                'cagg_7m',
                 start_offset => INTERVAL '2 days',
                 end_offset   => INTERVAL '0 minute',
                 schedule_interval => INTERVAL '30 seconds'
