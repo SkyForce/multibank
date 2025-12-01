@@ -1,0 +1,11 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-candles-ticks
+      author: system
+      changes:
+        - sql: |
+            CREATE TABLE IF NOT EXISTS ticks (
+                time        TIMESTAMPTZ NOT NULL,
+                symbol      TEXT NOT NULL,
+                price       DOUBLE PRECISION
+            );

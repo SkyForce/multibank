@@ -1,0 +1,19 @@
+databaseChangeLog:
+  - changeSet:
+      id: create-candles-rt
+      author: system
+      changes:
+        - sql: |
+            CREATE TABLE IF NOT EXISTS candles_rt (
+              symbol TEXT NOT NULL,
+              interval TEXT NOT NULL,
+              time BIGINT NOT NULL,
+              open DOUBLE PRECISION NOT NULL,
+              high DOUBLE PRECISION NOT NULL,
+              low DOUBLE PRECISION NOT NULL,
+              close DOUBLE PRECISION NOT NULL,
+              volume BIGINT NOT NULL,
+              PRIMARY KEY(symbol, interval, time)
+            );
+            
+            SELECT create_hypertable('candles_rt', 'time');
